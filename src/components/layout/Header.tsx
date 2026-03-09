@@ -56,7 +56,7 @@ const Header = () => {
           <div className="hidden lg:flex items-center gap-4">
             <Button variant="whatsapp" size="lg" asChild>
               <a
-                href="https://wa.me/1234567890?text=Hi! I'd like to order some brownies"
+                href="https://wa.me/919042029866?text=Hi! I'd like to order some brownies"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -104,7 +104,7 @@ const Header = () => {
               <div className="flex flex-col gap-3 pt-4 border-t border-border">
                 <Button variant="whatsapp" size="lg" asChild>
                   <a
-                    href="https://wa.me/1234567890?text=Hi! I'd like to order some brownies"
+                    href="https://wa.me/919042029866?text=Hi! I'd like to order some brownies"
                     target="_blank"
                     rel="noopener noreferrer"
                   >

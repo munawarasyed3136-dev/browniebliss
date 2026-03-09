@@ -293,7 +293,7 @@ const Contact = () => {
                   asChild
                 >
                   <a
-                    href="https://wa.me/1234567890?text=Hi! I'd like to know more about your brownies."
+                    href="https://wa.me/919042029866?text=Hi! I'd like to know more about your brownies."
                     target="_blank"
                     rel="noopener noreferrer"
                   >

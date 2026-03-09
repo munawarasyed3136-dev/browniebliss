@@ -1,13 +1,18 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Star, ChefHat, Leaf, Gift, Award, Quote } from "lucide-react";
+import { Star, ChefHat, Leaf, Gift, Award, Quote, Mail, Lock, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import Layout from "@/components/layout/Layout";
 import heroBrownies from "@/assets/hero-brownies.jpg";
 import brownieClassic from "@/assets/brownie-classic.jpg";
 import brownieCaramel from "@/assets/brownie-caramel.jpg";
 import brownieLoaded from "@/assets/brownie-loaded.jpg";
 import brownieRedvelvet from "@/assets/brownie-redvelvet.jpg";
+import brownieWalnut from "@/assets/brownie-walnut.jpg";
+import brownieNutella from "@/assets/brownie-nutella.jpg";
+import { toast } from "@/hooks/use-toast";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 30 },
@@ -24,71 +29,23 @@ const staggerContainer = {
 };
 
 const bestSellers = [
-  {
-    name: "Classic Walnut Brownie",
-    price: "₹120",
-    image: brownieClassic,
-    tag: "Bestseller",
-  },
-  {
-    name: "Salted Caramel Bliss",
-    price: "₹150",
-    image: brownieCaramel,
-    tag: "Customer Favorite",
-  },
-  {
-    name: "Oreo Overload",
-    price: "₹160",
-    image: brownieLoaded,
-    tag: "Premium",
-  },
-  {
-    name: "Red Velvet Dream",
-    price: "₹140",
-    image: brownieRedvelvet,
-    tag: "New",
-  },
+  { name: "Classic Walnut Brownie", price: "₹120", image: brownieWalnut, tag: "Bestseller" },
+  { name: "Salted Caramel Bliss", price: "₹150", image: brownieCaramel, tag: "Customer Favorite" },
+  { name: "Oreo Overload", price: "₹160", image: brownieLoaded, tag: "Premium" },
+  { name: "Red Velvet Dream", price: "₹140", image: brownieRedvelvet, tag: "New" },
 ];
 
 const features = [
-  {
-    icon: ChefHat,
-    title: "Freshly Baked",
-    description: "Baked fresh daily for maximum flavor and that perfect fudgy texture",
-  },
-  {
-    icon: Award,
-    title: "Premium Cocoa",
-    description: "Only the finest Belgian cocoa and premium chocolate in every brownie",
-  },
-  {
-    icon: Leaf,
-    title: "Eggless Options",
-    description: "Delicious eggless and vegan options available without compromising taste",
-  },
-  {
-    icon: Gift,
-    title: "Custom Orders",
-    description: "Personalized gift boxes and custom flavors for your special occasions",
-  },
+  { icon: ChefHat, title: "Freshly Baked", description: "Baked fresh daily for maximum flavor and that perfect fudgy texture" },
+  { icon: Award, title: "Premium Cocoa", description: "Only the finest Belgian cocoa and premium chocolate in every brownie" },
+  { icon: Leaf, title: "Eggless Options", description: "Delicious eggless and vegan options available without compromising taste" },
+  { icon: Gift, title: "Custom Orders", description: "Personalized gift boxes and custom flavors for your special occasions" },
 ];
 
 const reviews = [
-  {
-    name: "Priya Sharma",
-    text: "The best brownies I've ever tasted! The salted caramel is absolutely divine. My family is obsessed!",
-    rating: 5,
-  },
-  {
-    name: "Rahul Mehta",
-    text: "Ordered for my wife's birthday and she loved it. The gift packaging was beautiful and the brownies were fresh.",
-    rating: 5,
-  },
-  {
-    name: "Ananya Patel",
-    text: "Finally found a bakery that does amazing eggless brownies! The texture is perfect and so fudgy.",
-    rating: 5,
-  },
+  { name: "Priya Sharma", text: "The best brownies I've ever tasted! The salted caramel is absolutely divine. My family is obsessed!", rating: 5 },
+  { name: "Rahul Mehta", text: "Ordered for my wife's birthday and she loved it. The gift packaging was beautiful and the brownies were fresh.", rating: 5 },
+  { name: "Ananya Patel", text: "Finally found a bakery that does amazing eggless brownies! The texture is perfect and so fudgy.", rating: 5 },
 ];
 
 const instagramPosts = [
@@ -96,15 +53,35 @@ const instagramPosts = [
   brownieCaramel,
   brownieLoaded,
   brownieRedvelvet,
-  brownieClassic,
-  brownieCaramel,
+  brownieWalnut,
+  brownieNutella,
 ];
 
 const Index = () => {
+  const [authMode, setAuthMode] = useState<"signin" | "signup">("signup");
+  const [authForm, setAuthForm] = useState({ name: "", email: "", password: "" });
+
+  const handleAuthSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (authMode === "signup" && !authForm.name.trim()) {
+      toast({ title: "Name is required", variant: "destructive" });
+      return;
+    }
+    if (!authForm.email.trim() || !authForm.password.trim()) {
+      toast({ title: "Please fill all fields", variant: "destructive" });
+      return;
+    }
+    toast({
+      title: authMode === "signin" ? "Welcome back!" : "Account created!",
+      description: authMode === "signin" ? "You have successfully signed in." : "Welcome to Brownie Bliss!",
+    });
+    setAuthForm({ name: "", email: "", password: "" });
+  };
+
   return (
     <Layout>
-      {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center bg-gradient-hero overflow-hidden">
+      {/* Landing / Hero Section */}
+      <section className="relative min-h-screen flex items-center bg-gradient-hero overflow-hidden">
         <div className="absolute inset-0 opacity-5">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(38_55%_55%/0.3),transparent_70%)]" />
         </div>
@@ -118,17 +95,15 @@ const Index = () => {
             >
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-secondary rounded-full">
                 <span className="text-gold">✦</span>
-                <span className="text-sm font-medium text-foreground/80">
-                  Handcrafted with Love
-                </span>
+                <span className="text-sm font-medium text-foreground/80">Handcrafted with Love</span>
               </div>
               <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-foreground">
                 Where Every Bite{" "}
                 <span className="text-gradient-gold">Melts Hearts</span>
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed">
-                Indulge in our handcrafted brownies made with premium Belgian chocolate 
-                and the finest ingredients. Each brownie is a little piece of heaven.
+                Welcome to <strong>Brownie Bliss</strong> — your home for handcrafted brownies made with premium Belgian chocolate 
+                and the finest ingredients. Every brownie is a little piece of heaven, baked fresh with love.
               </p>
               <div className="flex flex-wrap gap-4">
                 <Button variant="hero" size="xl" asChild>
@@ -155,9 +130,7 @@ const Index = () => {
                       <Star key={i} size={16} className="fill-gold text-gold" />
                     ))}
                   </div>
-                  <p className="text-sm text-muted-foreground">
-                    2000+ Happy Customers
-                  </p>
+                  <p className="text-sm text-muted-foreground">2000+ Happy Customers</p>
                 </div>
               </div>
             </motion.div>
@@ -193,6 +166,121 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Sign In / Sign Up Section */}
+      <section className="py-24 bg-gradient-cream">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+            className="text-center mb-12"
+          >
+            <motion.span variants={fadeInUp} className="inline-block text-gold font-medium mb-4">
+              Join Us
+            </motion.span>
+            <motion.h2 variants={fadeInUp} className="font-display text-4xl md:text-5xl font-bold text-foreground mb-6">
+              Get Started with <span className="text-gradient-gold">Brownie Bliss</span>
+            </motion.h2>
+            <motion.p variants={fadeInUp} className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              Create an account or sign in to place orders, track deliveries, and get exclusive offers
+            </motion.p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="max-w-md mx-auto"
+          >
+            <div className="bg-card rounded-2xl shadow-medium p-8">
+              {/* Tab Switcher */}
+              <div className="flex rounded-xl bg-secondary p-1 mb-8">
+                <button
+                  onClick={() => setAuthMode("signin")}
+                  className={`flex-1 py-3 rounded-lg font-medium transition-all duration-300 ${
+                    authMode === "signin"
+                      ? "bg-gradient-gold text-chocolate-dark shadow-sm"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  Sign In
+                </button>
+                <button
+                  onClick={() => setAuthMode("signup")}
+                  className={`flex-1 py-3 rounded-lg font-medium transition-all duration-300 ${
+                    authMode === "signup"
+                      ? "bg-gradient-gold text-chocolate-dark shadow-sm"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  Sign Up
+                </button>
+              </div>
+
+              <form onSubmit={handleAuthSubmit} className="space-y-5">
+                {authMode === "signup" && (
+                  <div>
+                    <label className="block text-sm font-medium text-foreground mb-2">Name</label>
+                    <div className="relative">
+                      <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                      <Input
+                        placeholder="Your full name"
+                        value={authForm.name}
+                        onChange={(e) => setAuthForm({ ...authForm, name: e.target.value })}
+                        className="pl-10"
+                      />
+                    </div>
+                  </div>
+                )}
+                <div>
+                  <label className="block text-sm font-medium text-foreground mb-2">Email</label>
+                  <div className="relative">
+                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                    <Input
+                      type="email"
+                      placeholder="you@example.com"
+                      value={authForm.email}
+                      onChange={(e) => setAuthForm({ ...authForm, email: e.target.value })}
+                      className="pl-10"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-foreground mb-2">Password</label>
+                  <div className="relative">
+                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                    <Input
+                      type="password"
+                      placeholder="••••••••"
+                      value={authForm.password}
+                      onChange={(e) => setAuthForm({ ...authForm, password: e.target.value })}
+                      className="pl-10"
+                    />
+                  </div>
+                </div>
+                <Button type="submit" variant="hero" size="lg" className="w-full">
+                  {authMode === "signin" ? "Sign In" : "Create Account"}
+                </Button>
+              </form>
+
+              <p className="text-center text-sm text-muted-foreground mt-6">
+                {authMode === "signin" ? (
+                  <>Don't have an account?{" "}
+                    <button onClick={() => setAuthMode("signup")} className="text-gold font-medium hover:underline">Sign Up</button>
+                  </>
+                ) : (
+                  <>Already have an account?{" "}
+                    <button onClick={() => setAuthMode("signin")} className="text-gold font-medium hover:underline">Sign In</button>
+                  </>
+                )}
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Best Sellers Section */}
       <section className="py-24 bg-background">
         <div className="container mx-auto px-4">
@@ -203,22 +291,11 @@ const Index = () => {
             variants={staggerContainer}
             className="text-center mb-16"
           >
-            <motion.span
-              variants={fadeInUp}
-              className="inline-block text-gold font-medium mb-4"
-            >
-              Our Favorites
-            </motion.span>
-            <motion.h2
-              variants={fadeInUp}
-              className="font-display text-4xl md:text-5xl font-bold text-foreground mb-6"
-            >
+            <motion.span variants={fadeInUp} className="inline-block text-gold font-medium mb-4">Our Favorites</motion.span>
+            <motion.h2 variants={fadeInUp} className="font-display text-4xl md:text-5xl font-bold text-foreground mb-6">
               Best Selling <span className="text-gradient-gold">Brownies</span>
             </motion.h2>
-            <motion.p
-              variants={fadeInUp}
-              className="text-muted-foreground text-lg max-w-2xl mx-auto"
-            >
+            <motion.p variants={fadeInUp} className="text-muted-foreground text-lg max-w-2xl mx-auto">
               Discover our most loved creations, each one crafted to perfection
             </motion.p>
           </motion.div>
@@ -242,20 +319,12 @@ const Index = () => {
                   </span>
                 </div>
                 <div className="overflow-hidden">
-                  <img
-                    src={brownie.image}
-                    alt={brownie.name}
-                    className="w-full aspect-square object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
+                  <img src={brownie.image} alt={brownie.name} className="w-full aspect-square object-cover group-hover:scale-110 transition-transform duration-500" />
                 </div>
                 <div className="p-6">
-                  <h3 className="font-display text-xl font-semibold text-foreground mb-2">
-                    {brownie.name}
-                  </h3>
+                  <h3 className="font-display text-xl font-semibold text-foreground mb-2">{brownie.name}</h3>
                   <div className="flex items-center justify-between">
-                    <span className="text-2xl font-bold text-gold">
-                      {brownie.price}
-                    </span>
+                    <span className="text-2xl font-bold text-gold">{brownie.price}</span>
                     <Button variant="gold" size="sm" asChild>
                       <Link to="/order">Add to Cart</Link>
                     </Button>
@@ -283,16 +352,8 @@ const Index = () => {
             variants={staggerContainer}
             className="text-center mb-16"
           >
-            <motion.span
-              variants={fadeInUp}
-              className="inline-block text-gold font-medium mb-4"
-            >
-              Why Us
-            </motion.span>
-            <motion.h2
-              variants={fadeInUp}
-              className="font-display text-4xl md:text-5xl font-bold text-foreground mb-6"
-            >
+            <motion.span variants={fadeInUp} className="inline-block text-gold font-medium mb-4">Why Us</motion.span>
+            <motion.h2 variants={fadeInUp} className="font-display text-4xl md:text-5xl font-bold text-foreground mb-6">
               Why Choose <span className="text-gradient-gold">Brownie Bliss</span>
             </motion.h2>
           </motion.div>
@@ -313,12 +374,8 @@ const Index = () => {
                 <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-gold flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                   <feature.icon className="w-8 h-8 text-chocolate-dark" />
                 </div>
-                <h3 className="font-display text-xl font-semibold text-foreground mb-3">
-                  {feature.title}
-                </h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  {feature.description}
-                </p>
+                <h3 className="font-display text-xl font-semibold text-foreground mb-3">{feature.title}</h3>
+                <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -335,16 +392,8 @@ const Index = () => {
             variants={staggerContainer}
             className="text-center mb-16"
           >
-            <motion.span
-              variants={fadeInUp}
-              className="inline-block text-gold font-medium mb-4"
-            >
-              Testimonials
-            </motion.span>
-            <motion.h2
-              variants={fadeInUp}
-              className="font-display text-4xl md:text-5xl font-bold text-foreground mb-6"
-            >
+            <motion.span variants={fadeInUp} className="inline-block text-gold font-medium mb-4">Testimonials</motion.span>
+            <motion.h2 variants={fadeInUp} className="font-display text-4xl md:text-5xl font-bold text-foreground mb-6">
               What Our <span className="text-gradient-gold">Customers Say</span>
             </motion.h2>
           </motion.div>
@@ -357,25 +406,17 @@ const Index = () => {
             className="grid md:grid-cols-3 gap-8"
           >
             {reviews.map((review, index) => (
-              <motion.div
-                key={index}
-                variants={fadeInUp}
-                className="relative bg-card p-8 rounded-2xl shadow-soft"
-              >
+              <motion.div key={index} variants={fadeInUp} className="relative bg-card p-8 rounded-2xl shadow-soft">
                 <Quote className="absolute top-6 right-6 w-10 h-10 text-gold/20" />
                 <div className="flex items-center gap-1 mb-4">
                   {Array.from({ length: review.rating }).map((_, i) => (
                     <Star key={i} size={18} className="fill-gold text-gold" />
                   ))}
                 </div>
-                <p className="text-foreground leading-relaxed mb-6">
-                  "{review.text}"
-                </p>
+                <p className="text-foreground leading-relaxed mb-6">"{review.text}"</p>
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 rounded-full bg-gradient-gold flex items-center justify-center">
-                    <span className="text-chocolate-dark font-bold">
-                      {review.name.charAt(0)}
-                    </span>
+                    <span className="text-chocolate-dark font-bold">{review.name.charAt(0)}</span>
                   </div>
                   <div>
                     <p className="font-semibold text-foreground">{review.name}</p>
@@ -398,16 +439,8 @@ const Index = () => {
             variants={staggerContainer}
             className="text-center mb-16"
           >
-            <motion.span
-              variants={fadeInUp}
-              className="inline-block text-gold font-medium mb-4"
-            >
-              @browniebliss
-            </motion.span>
-            <motion.h2
-              variants={fadeInUp}
-              className="font-display text-4xl md:text-5xl font-bold text-foreground mb-6"
-            >
+            <motion.span variants={fadeInUp} className="inline-block text-gold font-medium mb-4">@browniebliss</motion.span>
+            <motion.h2 variants={fadeInUp} className="font-display text-4xl md:text-5xl font-bold text-foreground mb-6">
               Follow Us on <span className="text-gradient-gold">Instagram</span>
             </motion.h2>
           </motion.div>
@@ -428,11 +461,7 @@ const Index = () => {
                 rel="noopener noreferrer"
                 className="group relative aspect-square overflow-hidden rounded-xl"
               >
-                <img
-                  src={post}
-                  alt={`Instagram post ${index + 1}`}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
+                <img src={post} alt={`Instagram post ${index + 1}`} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                 <div className="absolute inset-0 bg-chocolate/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                   <span className="text-cream font-medium">View</span>
                 </div>
@@ -462,13 +491,9 @@ const Index = () => {
               <Button variant="gold" size="xl" asChild>
                 <Link to="/order">Order Now</Link>
               </Button>
-              <Button
-                variant="whatsapp"
-                size="xl"
-                asChild
-              >
+              <Button variant="whatsapp" size="xl" asChild>
                 <a
-                  href="https://wa.me/1234567890?text=Hi! I'd like to order some brownies"
+                  href="https://wa.me/919042029866?text=Hi! I'd like to order some brownies"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
