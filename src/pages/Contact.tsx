@@ -36,7 +36,7 @@ const contactInfo = [
   {
     icon: Mail,
     title: "Email Us",
-    details: ["hello@browniebliss.com", "orders@browniebliss.com"],
+    details: ["browniebliss898@gmail.com"],
   },
   {
     icon: Clock,
