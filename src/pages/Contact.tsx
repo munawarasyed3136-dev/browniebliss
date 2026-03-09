@@ -31,12 +31,12 @@ const contactInfo = [
   {
     icon: Phone,
     title: "Call Us",
-    details: ["+1 (234) 567-890", "+1 (234) 567-891"],
+    details: ["+91 90420 29866"],
   },
   {
     icon: Mail,
     title: "Email Us",
-    details: ["hello@browniebliss.com", "orders@browniebliss.com"],
+    details: ["browniebliss898@gmail.com"],
   },
   {
     icon: Clock,
@@ -293,7 +293,7 @@ const Contact = () => {
                   asChild
                 >
                   <a
-                    href="https://wa.me/1234567890?text=Hi! I'd like to know more about your brownies."
+                    href="https://wa.me/919042029866?text=Hi! I'd like to know more about your brownies."
                     target="_blank"
                     rel="noopener noreferrer"
                   >

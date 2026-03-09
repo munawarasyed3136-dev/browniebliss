@@ -8,6 +8,16 @@ import brownieCaramel from "@/assets/brownie-caramel.jpg";
 import brownieLoaded from "@/assets/brownie-loaded.jpg";
 import brownieRedvelvet from "@/assets/brownie-redvelvet.jpg";
 import brownieVegan from "@/assets/brownie-vegan.jpg";
+import brownieWalnut from "@/assets/brownie-walnut.jpg";
+import brownieDoublechoc from "@/assets/brownie-doublechoc.jpg";
+import brownieNutella from "@/assets/brownie-nutella.jpg";
+import browniePeanutbutter from "@/assets/brownie-peanutbutter.jpg";
+import brownieMatcha from "@/assets/brownie-matcha.jpg";
+import brownieEspresso from "@/assets/brownie-espresso.jpg";
+import brownieKitkat from "@/assets/brownie-kitkat.jpg";
+import brownieSundae from "@/assets/brownie-sundae.jpg";
+import brownieEggless from "@/assets/brownie-eggless.jpg";
+import brownieEgglessWalnut from "@/assets/brownie-eggless-walnut.jpg";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 30 },
@@ -28,123 +38,45 @@ const menuCategories = [
     name: "Classic Brownies",
     description: "Our timeless favorites that started it all",
     items: [
-      {
-        name: "Classic Fudge Brownie",
-        description: "Rich, dense chocolate brownie with a fudgy center",
-        price: "₹100",
-        image: brownieClassic,
-      },
-      {
-        name: "Walnut Brownie",
-        description: "Classic brownie loaded with crunchy walnuts",
-        price: "₹120",
-        image: brownieClassic,
-      },
-      {
-        name: "Double Chocolate",
-        description: "Intensely chocolatey with chocolate chips",
-        price: "₹110",
-        image: brownieClassic,
-      },
+      { name: "Classic Fudge Brownie", description: "Rich, dense chocolate brownie with a fudgy center", price: "₹100", image: brownieClassic },
+      { name: "Walnut Brownie", description: "Classic brownie loaded with crunchy walnuts", price: "₹120", image: brownieWalnut },
+      { name: "Double Chocolate", description: "Intensely chocolatey with chocolate chips", price: "₹110", image: brownieDoublechoc },
     ],
   },
   {
     name: "Signature Brownies",
     description: "Our chef's special creations",
     items: [
-      {
-        name: "Salted Caramel Bliss",
-        description: "Topped with homemade salted caramel and sea salt flakes",
-        price: "₹150",
-        image: brownieCaramel,
-      },
-      {
-        name: "Nutella Swirl",
-        description: "Marbled with creamy Nutella throughout",
-        price: "₹140",
-        image: brownieClassic,
-      },
-      {
-        name: "Peanut Butter Dream",
-        description: "Swirled with smooth peanut butter",
-        price: "₹145",
-        image: brownieCaramel,
-      },
+      { name: "Salted Caramel Bliss", description: "Topped with homemade salted caramel and sea salt flakes", price: "₹150", image: brownieCaramel },
+      { name: "Nutella Swirl", description: "Marbled with creamy Nutella throughout", price: "₹140", image: brownieNutella },
+      { name: "Peanut Butter Dream", description: "Swirled with smooth peanut butter", price: "₹145", image: browniePeanutbutter },
     ],
   },
   {
     name: "Premium Loaded Brownies",
     description: "Indulgent toppings for the ultimate experience",
     items: [
-      {
-        name: "Oreo Overload",
-        description: "Loaded with Oreo cookies and white chocolate chips",
-        price: "₹160",
-        image: brownieLoaded,
-      },
-      {
-        name: "KitKat Crunch",
-        description: "Topped with KitKat pieces and chocolate drizzle",
-        price: "₹165",
-        image: brownieLoaded,
-      },
-      {
-        name: "Brownie Sundae",
-        description: "Topped with ice cream, nuts, and chocolate sauce",
-        price: "₹180",
-        image: brownieLoaded,
-      },
+      { name: "Oreo Overload", description: "Loaded with Oreo cookies and white chocolate chips", price: "₹160", image: brownieLoaded },
+      { name: "KitKat Crunch", description: "Topped with KitKat pieces and chocolate drizzle", price: "₹165", image: brownieKitkat },
+      { name: "Brownie Sundae", description: "Topped with ice cream, nuts, and chocolate sauce", price: "₹180", image: brownieSundae },
     ],
   },
   {
     name: "Special Flavors",
     description: "Unique creations for adventurous taste buds",
     items: [
-      {
-        name: "Red Velvet Dream",
-        description: "Red velvet brownie with cream cheese swirl",
-        price: "₹140",
-        image: brownieRedvelvet,
-      },
-      {
-        name: "Matcha Fusion",
-        description: "Japanese matcha infused dark chocolate brownie",
-        price: "₹155",
-        image: brownieVegan,
-      },
-      {
-        name: "Espresso Shot",
-        description: "Coffee lovers delight with espresso kick",
-        price: "₹145",
-        image: brownieClassic,
-      },
+      { name: "Red Velvet Dream", description: "Red velvet brownie with cream cheese swirl", price: "₹140", image: brownieRedvelvet },
+      { name: "Matcha Fusion", description: "Japanese matcha infused dark chocolate brownie", price: "₹155", image: brownieMatcha },
+      { name: "Espresso Shot", description: "Coffee lovers delight with espresso kick", price: "₹145", image: brownieEspresso },
     ],
   },
   {
     name: "Eggless & Vegan",
     description: "Delicious options for everyone",
     items: [
-      {
-        name: "Eggless Classic",
-        description: "Our signature brownie, completely egg-free",
-        price: "₹110",
-        image: brownieVegan,
-        isVegan: true,
-      },
-      {
-        name: "Vegan Dark Chocolate",
-        description: "100% plant-based with dark chocolate",
-        price: "₹130",
-        image: brownieVegan,
-        isVegan: true,
-      },
-      {
-        name: "Eggless Walnut",
-        description: "Egg-free version of our popular walnut brownie",
-        price: "₹125",
-        image: brownieVegan,
-        isVegan: true,
-      },
+      { name: "Eggless Classic", description: "Our signature brownie, completely egg-free", price: "₹110", image: brownieEggless, isVegan: true },
+      { name: "Vegan Dark Chocolate", description: "100% plant-based with dark chocolate", price: "₹130", image: brownieVegan, isVegan: true },
+      { name: "Eggless Walnut", description: "Egg-free version of our popular walnut brownie", price: "₹125", image: brownieEgglessWalnut, isVegan: true },
     ],
   },
 ];
@@ -160,15 +92,12 @@ const Menu = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <span className="inline-block text-gold font-medium mb-4">
-              Our Menu
-            </span>
+            <span className="inline-block text-gold font-medium mb-4">Our Menu</span>
             <h1 className="font-display text-5xl md:text-6xl font-bold text-foreground mb-6">
               Brownie <span className="text-gradient-gold">Collection</span>
             </h1>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Explore our handcrafted selection of premium brownies, 
-              each made with love and the finest ingredients
+              Explore our handcrafted selection of premium brownies, each made with love and the finest ingredients
             </p>
           </motion.div>
         </div>
@@ -188,16 +117,10 @@ const Menu = () => {
               variants={staggerContainer}
               className="mb-12"
             >
-              <motion.h2
-                variants={fadeInUp}
-                className="font-display text-3xl md:text-4xl font-bold text-foreground mb-3"
-              >
+              <motion.h2 variants={fadeInUp} className="font-display text-3xl md:text-4xl font-bold text-foreground mb-3">
                 {category.name}
               </motion.h2>
-              <motion.p
-                variants={fadeInUp}
-                className="text-muted-foreground text-lg"
-              >
+              <motion.p variants={fadeInUp} className="text-muted-foreground text-lg">
                 {category.description}
               </motion.p>
             </motion.div>
@@ -229,16 +152,10 @@ const Menu = () => {
                     )}
                   </div>
                   <div className="p-6">
-                    <h3 className="font-display text-xl font-semibold text-foreground mb-2">
-                      {item.name}
-                    </h3>
-                    <p className="text-muted-foreground text-sm mb-4">
-                      {item.description}
-                    </p>
+                    <h3 className="font-display text-xl font-semibold text-foreground mb-2">{item.name}</h3>
+                    <p className="text-muted-foreground text-sm mb-4">{item.description}</p>
                     <div className="flex items-center justify-between">
-                      <span className="text-2xl font-bold text-gold">
-                        {item.price}
-                      </span>
+                      <span className="text-2xl font-bold text-gold">{item.price}</span>
                       <Button variant="gold" size="sm" asChild>
                         <Link to="/order">Order</Link>
                       </Button>

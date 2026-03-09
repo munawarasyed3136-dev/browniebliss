@@ -109,7 +109,7 @@ const Order = () => {
     const message = `🍫 *New Brownie Order*\n\n*Order Details:*\n${orderDetails}\n\n*Total: ₹${totalAmount}*\n\n*Customer Details:*\nName: ${customerInfo.name}\nPhone: ${customerInfo.phone}\nAddress: ${customerInfo.address}${customerInfo.notes ? `\nNotes: ${customerInfo.notes}` : ""}`;
 
     const encodedMessage = encodeURIComponent(message);
-    window.open(`https://wa.me/1234567890?text=${encodedMessage}`, "_blank");
+    window.open(`https://wa.me/919042029866?text=${encodedMessage}`, "_blank");
   };
 
   return (
