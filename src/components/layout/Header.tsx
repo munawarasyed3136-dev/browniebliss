@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Phone } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -54,16 +54,6 @@ const Header = () => {
 
           {/* Desktop CTA */}
           <div className="hidden lg:flex items-center gap-4">
-            <Button variant="whatsapp" size="lg" asChild>
-              <a
-                href="https://wa.me/919042029866?text=Hi! I'd like to order some brownies"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Phone className="w-4 h-4" />
-                WhatsApp Order
-              </a>
-            </Button>
             <Button variant="hero" size="lg" asChild>
               <Link to="/order">Order Now</Link>
             </Button>
@@ -102,16 +92,6 @@ const Header = () => {
                 </Link>
               ))}
               <div className="flex flex-col gap-3 pt-4 border-t border-border">
-                <Button variant="whatsapp" size="lg" asChild>
-                  <a
-                    href="https://wa.me/919042029866?text=Hi! I'd like to order some brownies"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Phone className="w-4 h-4" />
-                    WhatsApp Order
-                  </a>
-                </Button>
                 <Button variant="hero" size="lg" asChild>
                   <Link to="/order" onClick={() => setIsMobileMenuOpen(false)}>
                     Order Now

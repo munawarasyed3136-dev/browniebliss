@@ -1,9 +1,7 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Star, ChefHat, Leaf, Gift, Award, Quote, Mail, Lock, User } from "lucide-react";
+import { Star, ChefHat, Leaf, Gift, Award, Quote } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import Layout from "@/components/layout/Layout";
 import heroBrownies from "@/assets/hero-brownies.jpg";
 import brownieClassic from "@/assets/brownie-classic.jpg";
@@ -12,7 +10,6 @@ import brownieLoaded from "@/assets/brownie-loaded.jpg";
 import brownieRedvelvet from "@/assets/brownie-redvelvet.jpg";
 import brownieWalnut from "@/assets/brownie-walnut.jpg";
 import brownieNutella from "@/assets/brownie-nutella.jpg";
-import { toast } from "@/hooks/use-toast";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 30 },
@@ -58,26 +55,6 @@ const instagramPosts = [
 ];
 
 const Index = () => {
-  const [authMode, setAuthMode] = useState<"signin" | "signup">("signup");
-  const [authForm, setAuthForm] = useState({ name: "", email: "", password: "" });
-
-  const handleAuthSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (authMode === "signup" && !authForm.name.trim()) {
-      toast({ title: "Name is required", variant: "destructive" });
-      return;
-    }
-    if (!authForm.email.trim() || !authForm.password.trim()) {
-      toast({ title: "Please fill all fields", variant: "destructive" });
-      return;
-    }
-    toast({
-      title: authMode === "signin" ? "Welcome back!" : "Account created!",
-      description: authMode === "signin" ? "You have successfully signed in." : "Welcome to Brownie Bliss!",
-    });
-    setAuthForm({ name: "", email: "", password: "" });
-  };
-
   return (
     <Layout>
       {/* Landing / Hero Section */}
@@ -107,7 +84,7 @@ const Index = () => {
               </p>
               <div className="flex flex-wrap gap-4">
                 <Button variant="hero" size="xl" asChild>
-                  <Link to="/order">Order Now</Link>
+                  <Link to="/menu">Order Now</Link>
                 </Button>
                 <Button variant="heroOutline" size="xl" asChild>
                   <Link to="/menu">View Menu</Link>
@@ -163,121 +140,6 @@ const Index = () => {
               <div className="absolute -bottom-4 -left-4 w-40 h-40 bg-chocolate/10 rounded-full blur-3xl" />
             </motion.div>
           </div>
-        </div>
-      </section>
-
-      {/* Sign In / Sign Up Section */}
-      <section className="py-24 bg-gradient-cream">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-            variants={staggerContainer}
-            className="text-center mb-12"
-          >
-            <motion.span variants={fadeInUp} className="inline-block text-gold font-medium mb-4">
-              Join Us
-            </motion.span>
-            <motion.h2 variants={fadeInUp} className="font-display text-4xl md:text-5xl font-bold text-foreground mb-6">
-              Get Started with <span className="text-gradient-gold">Brownie Bliss</span>
-            </motion.h2>
-            <motion.p variants={fadeInUp} className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Create an account or sign in to place orders, track deliveries, and get exclusive offers
-            </motion.p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="max-w-md mx-auto"
-          >
-            <div className="bg-card rounded-2xl shadow-medium p-8">
-              {/* Tab Switcher */}
-              <div className="flex rounded-xl bg-secondary p-1 mb-8">
-                <button
-                  onClick={() => setAuthMode("signin")}
-                  className={`flex-1 py-3 rounded-lg font-medium transition-all duration-300 ${
-                    authMode === "signin"
-                      ? "bg-gradient-gold text-chocolate-dark shadow-sm"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  Sign In
-                </button>
-                <button
-                  onClick={() => setAuthMode("signup")}
-                  className={`flex-1 py-3 rounded-lg font-medium transition-all duration-300 ${
-                    authMode === "signup"
-                      ? "bg-gradient-gold text-chocolate-dark shadow-sm"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  Sign Up
-                </button>
-              </div>
-
-              <form onSubmit={handleAuthSubmit} className="space-y-5">
-                {authMode === "signup" && (
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">Name</label>
-                    <div className="relative">
-                      <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                      <Input
-                        placeholder="Your full name"
-                        value={authForm.name}
-                        onChange={(e) => setAuthForm({ ...authForm, name: e.target.value })}
-                        className="pl-10"
-                      />
-                    </div>
-                  </div>
-                )}
-                <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">Email</label>
-                  <div className="relative">
-                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                    <Input
-                      type="email"
-                      placeholder="you@example.com"
-                      value={authForm.email}
-                      onChange={(e) => setAuthForm({ ...authForm, email: e.target.value })}
-                      className="pl-10"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">Password</label>
-                  <div className="relative">
-                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                    <Input
-                      type="password"
-                      placeholder="••••••••"
-                      value={authForm.password}
-                      onChange={(e) => setAuthForm({ ...authForm, password: e.target.value })}
-                      className="pl-10"
-                    />
-                  </div>
-                </div>
-                <Button type="submit" variant="hero" size="lg" className="w-full">
-                  {authMode === "signin" ? "Sign In" : "Create Account"}
-                </Button>
-              </form>
-
-              <p className="text-center text-sm text-muted-foreground mt-6">
-                {authMode === "signin" ? (
-                  <>Don't have an account?{" "}
-                    <button onClick={() => setAuthMode("signup")} className="text-gold font-medium hover:underline">Sign Up</button>
-                  </>
-                ) : (
-                  <>Already have an account?{" "}
-                    <button onClick={() => setAuthMode("signin")} className="text-gold font-medium hover:underline">Sign In</button>
-                  </>
-                )}
-              </p>
-            </div>
-          </motion.div>
         </div>
       </section>
 
@@ -491,14 +353,8 @@ const Index = () => {
               <Button variant="gold" size="xl" asChild>
                 <Link to="/order">Order Now</Link>
               </Button>
-              <Button variant="whatsapp" size="xl" asChild>
-                <a
-                  href="https://wa.me/919042029866?text=Hi! I'd like to order some brownies"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  WhatsApp Us
-                </a>
+              <Button variant="heroOutline" size="xl" className="border-cream text-cream hover:bg-cream hover:text-chocolate" asChild>
+                <Link to="/menu">View Menu</Link>
               </Button>
             </div>
           </motion.div>

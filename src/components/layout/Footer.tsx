@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Instagram, Facebook, Twitter, MapPin, Phone, Mail, Heart } from "lucide-react";
+import { Instagram, Facebook, Twitter, MapPin, Mail, Heart } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -16,28 +16,13 @@ const Footer = () => {
               Every bite is a moment of pure chocolate bliss.
             </p>
             <div className="flex items-center gap-4 pt-4">
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 rounded-full bg-cream/10 hover:bg-gold hover:text-chocolate-dark transition-all duration-300"
-              >
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-cream/10 hover:bg-gold hover:text-chocolate-dark transition-all duration-300">
                 <Instagram size={20} />
               </a>
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 rounded-full bg-cream/10 hover:bg-gold hover:text-chocolate-dark transition-all duration-300"
-              >
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-cream/10 hover:bg-gold hover:text-chocolate-dark transition-all duration-300">
                 <Facebook size={20} />
               </a>
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 rounded-full bg-cream/10 hover:bg-gold hover:text-chocolate-dark transition-all duration-300"
-              >
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-cream/10 hover:bg-gold hover:text-chocolate-dark transition-all duration-300">
                 <Twitter size={20} />
               </a>
             </div>
@@ -55,10 +40,7 @@ const Footer = () => {
                 { name: "Order Now", path: "/order" },
               ].map((link) => (
                 <li key={link.path}>
-                  <Link
-                    to={link.path}
-                    className="text-cream/80 hover:text-gold transition-colors duration-300"
-                  >
+                  <Link to={link.path} className="text-cream/80 hover:text-gold transition-colors duration-300">
                     {link.name}
                   </Link>
                 </li>
@@ -72,25 +54,11 @@ const Footer = () => {
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <MapPin size={20} className="text-gold mt-1 flex-shrink-0" />
-                <span className="text-cream/80">
-                  123 Chocolate Street, Sweet City, SC 12345
-                </span>
-              </li>
-              <li className="flex items-center gap-3">
-                <Phone size={20} className="text-gold flex-shrink-0" />
-                <a
-                  href="tel:+919042029866"
-                  className="text-cream/80 hover:text-gold transition-colors"
-                >
-                  +91 90420 29866
-                </a>
+                <span className="text-cream/80">123 Chocolate Street, Sweet City, SC 12345</span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail size={20} className="text-gold flex-shrink-0" />
-                <a
-                  href="mailto:browniebliss898@gmail.com"
-                  className="text-cream/80 hover:text-gold transition-colors"
-                >
+                <a href="mailto:browniebliss898@gmail.com" className="text-cream/80 hover:text-gold transition-colors">
                   browniebliss898@gmail.com
                 </a>
               </li>
@@ -101,27 +69,16 @@ const Footer = () => {
           <div>
             <h4 className="font-display text-xl font-semibold mb-6">Opening Hours</h4>
             <ul className="space-y-3 text-cream/80">
-              <li className="flex justify-between">
-                <span>Monday - Friday</span>
-                <span>9:00 AM - 8:00 PM</span>
-              </li>
-              <li className="flex justify-between">
-                <span>Saturday</span>
-                <span>10:00 AM - 9:00 PM</span>
-              </li>
-              <li className="flex justify-between">
-                <span>Sunday</span>
-                <span>11:00 AM - 6:00 PM</span>
-              </li>
+              <li className="flex justify-between"><span>Monday - Friday</span><span>9:00 AM - 8:00 PM</span></li>
+              <li className="flex justify-between"><span>Saturday</span><span>10:00 AM - 9:00 PM</span></li>
+              <li className="flex justify-between"><span>Sunday</span><span>11:00 AM - 6:00 PM</span></li>
             </ul>
           </div>
         </div>
 
         {/* Bottom Bar */}
         <div className="border-t border-cream/20 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-cream/60 text-sm">
-            © 2025 Brownie Bliss. All rights reserved.
-          </p>
+          <p className="text-cream/60 text-sm">© 2025 Brownie Bliss. All rights reserved.</p>
           <p className="text-cream/60 text-sm flex items-center gap-1">
             Made with <Heart size={14} className="text-gold" /> and lots of chocolate
           </p>
