@@ -224,34 +224,24 @@ const Contact = () => {
             <p className="text-cream/70 mb-8">
               Subscribe to receive exclusive deals, new flavor launches, and seasonal brownie specials straight to your inbox.
             </p>
-            <form
-              onSubmit={async (e) => {
-                e.preventDefault();
-                const result = subscribeSchema.safeParse({ email: subscribeEmail });
-                if (!result.success) {
-                  toast({ title: "Invalid Email", description: result.error.errors[0].message, variant: "destructive" });
-                  return;
-                }
-                setIsSubscribing(true);
-                await new Promise((resolve) => setTimeout(resolve, 800));
-                toast({ title: "Subscribed! 🎉", description: "You'll now receive our seasonal offers and newsletter." });
-                setSubscribeEmail("");
-                setIsSubscribing(false);
-              }}
-              className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
-            >
-              <Input
-                type="email"
-                placeholder="Enter your email"
-                value={subscribeEmail}
-                onChange={(e) => setSubscribeEmail(e.target.value)}
-                required
-                className="bg-cream/10 border-cream/20 text-cream placeholder:text-cream/40 focus-visible:ring-gold"
-              />
-              <Button type="submit" variant="gold" size="lg" disabled={isSubscribing} className="shrink-0">
-                {isSubscribing ? "Subscribing..." : "Subscribe"}
-              </Button>
-            </form>
+           <form 
+  action="https://app.us9.list-manage.com/subscribe/post?u=b1138812ee4833947c1dae7cb&id=d4f3f785e3&f_id=0021d0e1f0"
+  method="post"
+  target="_blank"
+  className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
+>
+  <Input
+    type="email"
+    name="EMAIL"
+    placeholder="Enter your email"
+    required
+    className="bg-cream/10 border-cream/20 text-cream placeholder:text-cream/40 focus-visible:ring-gold"
+  />
+
+  <Button type="submit" variant="gold" size="lg" className="shrink-0">
+    Subscribe
+  </Button>
+</form>
           </motion.div>
         </div>
       </section>
