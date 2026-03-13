@@ -203,6 +203,58 @@ const Contact = () => {
           </div>
         </div>
       </section>
+
+      {/* Newsletter Subscribe Section */}
+      <section className="py-16 bg-gradient-chocolate">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="max-w-2xl mx-auto text-center"
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-cream/10 rounded-full mb-6">
+              <Sparkles className="w-4 h-4 text-gold" />
+              <span className="text-sm font-medium text-cream/80">Stay Updated</span>
+            </div>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-cream mb-4">
+              Get Seasonal Offers & <span className="text-gradient-gold">Newsletter</span>
+            </h2>
+            <p className="text-cream/70 mb-8">
+              Subscribe to receive exclusive deals, new flavor launches, and seasonal brownie specials straight to your inbox.
+            </p>
+            <form
+              onSubmit={async (e) => {
+                e.preventDefault();
+                const result = subscribeSchema.safeParse({ email: subscribeEmail });
+                if (!result.success) {
+                  toast({ title: "Invalid Email", description: result.error.errors[0].message, variant: "destructive" });
+                  return;
+                }
+                setIsSubscribing(true);
+                await new Promise((resolve) => setTimeout(resolve, 800));
+                toast({ title: "Subscribed! 🎉", description: "You'll now receive our seasonal offers and newsletter." });
+                setSubscribeEmail("");
+                setIsSubscribing(false);
+              }}
+              className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
+            >
+              <Input
+                type="email"
+                placeholder="Enter your email"
+                value={subscribeEmail}
+                onChange={(e) => setSubscribeEmail(e.target.value)}
+                required
+                className="bg-cream/10 border-cream/20 text-cream placeholder:text-cream/40 focus-visible:ring-gold"
+              />
+              <Button type="submit" variant="gold" size="lg" disabled={isSubscribing} className="shrink-0">
+                {isSubscribing ? "Subscribing..." : "Subscribe"}
+              </Button>
+            </form>
+          </motion.div>
+        </div>
+      </section>
     </Layout>
   );
 };
