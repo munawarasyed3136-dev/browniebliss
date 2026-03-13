@@ -82,14 +82,6 @@ const Index = () => {
                 Welcome to <strong>Brownie Bliss</strong> — your home for handcrafted brownies made with premium Belgian chocolate 
                 and the finest ingredients. Every brownie is a little piece of heaven, baked fresh with love.
               </p>
-              <div className="flex flex-wrap gap-4">
-                <Button variant="hero" size="xl" asChild>
-                  <Link to="/menu">Order Now</Link>
-                </Button>
-                <Button variant="heroOutline" size="xl" asChild>
-                  <Link to="/menu">View Menu</Link>
-                </Button>
-              </div>
               <div className="flex items-center gap-6 pt-4">
                 <div className="flex -space-x-2">
                   {[1, 2, 3, 4].map((i) => (
