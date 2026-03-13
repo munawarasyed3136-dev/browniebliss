@@ -47,6 +47,10 @@ const contactSchema = z.object({
   message: z.string().trim().min(1, "Message is required").max(1000),
 });
 
+const subscribeSchema = z.object({
+  email: z.string().trim().email("Please enter a valid email address").max(255),
+});
+
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -54,6 +58,8 @@ const Contact = () => {
     subject: "",
     message: "",
   });
+  const [subscribeEmail, setSubscribeEmail] = useState("");
+  const [isSubscribing, setIsSubscribing] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
